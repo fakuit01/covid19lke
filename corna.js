@@ -62,7 +62,7 @@ class CoronaWidget {
       Script.complete()
   }
 
-  async createWidget(items) {
+  async createWidget() {
     let data = await this.getData()
 
     let list = new ListWidget()
@@ -84,38 +84,35 @@ class CoronaWidget {
     let headerText = textStack.addText("Coronazahlen \n" + data.cityName.toUpperCase())
     headerText.textColor = Color.green()
     headerText.font = Font.mediumSystemFont(12)
-    //textStack.addSpacer()
 
+    let text1 = textStack.addText("Infizierte: " + data.infectedPersons)
+    text1.textColor = Color.dynamic(Color.black(), Color.white())
+    text1.font = Font.mediumSystemFont(10)
 
-    let test1 = textStack.addText("Infizierte: " + data.infectedPersons)
-    test1.textColor = Color.dynamic(Color.black(), Color.white())
-    test1.font = Font.mediumSystemFont(10)
+    let text2 = textStack.addText("Neuinfizierte: " + data.inf_neu)
+    text2.textColor = Color.dynamic(Color.black(), Color.white())
+    text2.font = Font.mediumSystemFont(10)
 
-    let test5 = textStack.addText("Neuinfizierte: " + data.inf_neu)
-    test5.textColor = Color.dynamic(Color.black(), Color.white())
-    test5.font = Font.mediumSystemFont(10)
+    let text3 = textStack.addText("Bevölkerung Prozent: " + data.residentsPercent)
+    text3.textColor = Color.dynamic(Color.black(), Color.white())
+    text3.font = Font.mediumSystemFont(10)
 
-    let test3 = textStack.addText("Bevölkerung Prozent: " + data.residentsPercent)
-    test3.textColor = Color.dynamic(Color.black(), Color.white())
-    test3.font = Font.mediumSystemFont(10)
+    let text4 = textStack.addText("Infizierte gesamt: " + data.infTotal)
+    text4.textColor = Color.dynamic(Color.black(), Color.white())
+    text4.font = Font.mediumSystemFont(10)
 
-    let test4 = textStack.addText("Infizierte gesamt: " + data.infTotal)
-    test4.textColor = Color.dynamic(Color.black(), Color.white())
-    test4.font = Font.mediumSystemFont(10)
+    let text5 = textStack.addText("Tote: " + data.deaths)
+    text5.textColor = Color.dynamic(Color.black(), Color.white())
+    text5.font = Font.mediumSystemFont(10)
 
-    let test2 = textStack.addText("Tote: " + data.deaths)
-    test2.textColor = Color.dynamic(Color.black(), Color.white())
-    test2.font = Font.mediumSystemFont(10)
+    let text6 = textStack.addText("Neue Tote: " + data.tod_neu)
+    text6.textColor = Color.dynamic(Color.black(), Color.white())
+    text6.font = Font.mediumSystemFont(10)
 
-    let test6 = textStack.addText("Neue Tote: " + data.tod_neu)
-    test6.textColor = Color.dynamic(Color.black(), Color.white())
-    test6.font = Font.mediumSystemFont(10)
-
-    /*
-    let test7 = textStack.addText("Einwohner: " + data.residents)
+    let test7 = textStack.addText("Einwohner: " + data.residents)//+"\nDatum: "+ data.datum)
     test7.textColor = Color.white()
-    test7.font = Font.mediumSystemFont(10)
-    */
+    test7.font = Font.mediumSystemFont(8)
+
 //Was ist das?
 /*
     let test6 = textStack.addText("gen: " + data.gen)
@@ -134,7 +131,8 @@ class CoronaWidget {
 
 
       var attr = features[0].attributes
-      let city = param.toString()
+      let city = "Plochingen"
+      city = param.toString()
 
       /*
       //var len = features.length;
@@ -178,6 +176,7 @@ class CoronaWidget {
       let proz_gem = attr.proz_gem.toString()
       let tod_neu = attr.tod_neu.toString()
       let inf_neu = attr.inf_neu.toString()
+      let datum = attr.dat_zahl.toString()
       //console.log(cityName)
       return{
         cityName: cityName,
@@ -190,20 +189,11 @@ class CoronaWidget {
         proz_gem: proz_gem,
         tod_neu: tod_neu,
         inf_neu: inf_neu,
+        datum: datum,
         deaths: deaths
 
 
       };
-
-
-
-
-        //let currentData = await new Request(this.apiUrlDistricts.loadJSON())
-        //let attr = currentData.features[0].attributes
-        /*
-       */
-
-        //return {error: "Stadt nicht gefunden."};
     } catch(e) {
       return { error: "Error getting data" };
     }
