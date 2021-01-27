@@ -116,6 +116,10 @@ class CoronaWidget {
     test7.textColor = Color.white()
     test7.font = Font.mediumSystemFont(8)
 
+    let test8 = textStack.addText("Aktualisiert: " + data.lastupDated)
+    test8.textColor = Color.white()
+    test8.font = Font.mediumSystemFont(6)
+
 //Was ist das?
 /*
     let test6 = textStack.addText("gen: " + data.gen)
@@ -129,6 +133,17 @@ class CoronaWidget {
   async getData() {
      try {
       var d = new Date();
+      var hours = d.getHours().toString();
+      if(hours.toString().length == 1) {
+        hours = '0'+hours;
+      }
+    var minute = d.getMinutes().toString();
+    if(minute.toString().length == 1) {
+      minute = '0'+minute;
+    }
+    var lastupDated = hours+":"+minute
+
+
       var day = (d.getDate()-1).toString();
       var month = (d.getMonth()+1).toString();
         if(month.toString().length == 1) {
@@ -203,6 +218,7 @@ class CoronaWidget {
         tod_neu: tod_neu,
         inf_neu: inf_neu,
         datum: datum,
+        lastupDated: lastupDated,
         deaths: deaths
 
 
