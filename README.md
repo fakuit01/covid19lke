@@ -1,7 +1,7 @@
 # covid19lke
 Widget für die Corona Lage der einzelnen Städte im Landkreis Esslingen
 
-1. Code aus der Datei corona.js in die Zwischenablage kopieren.
+1. Code aus der Datei corona.js in die Zwischenablage kopieren (Mobile auf "browse code" klicken).
 2. App "Scriptable" aus dem Appstore laden. App Link: https://apps.apple.com/de/app/scriptable/id1405459188
 3. In der App oben rechts auf das "Plus" Zeichen drücken.
 4. Doppelklick auf die große Fläche und auf "Einsetzen" drücken.
