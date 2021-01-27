@@ -4,7 +4,10 @@ let param = args.widgetParameter
 class CoronaWidget {
 
   constructor() {
-    this.apiUrl = "https://services2.arcgis.com/mL26ZKdlhFJH9AoM/arcgis/rest/services/es_corona/FeatureServer/0/query?f=json&where=dat_text%3D20210125&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=NAMGEM%20asc&resultOffset=0&resultRecordCount=50&resultType=standard&cacheHint=true"
+    //this.apiUrl = (dateformat) => "https://services2.arcgis.com/mL26ZKdlhFJH9AoM/arcgis/rest/services/es_corona/FeatureServer/0/query?f=json&where=dat_text%3D${dateformat}&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=NAMGEM%20asc&resultOffset=0&resultRecordCount=50&resultType=standard&cacheHint=true"
+    //this.apiUrl1 ="https://services2.arcgis.com/mL26ZKdlhFJH9AoM/arcgis/rest/services/es_corona/FeatureServer/0/query?f=json&where=dat_text%3D20210126&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=NAMGEM%20asc&outSR=102100&resultOffset=0&resultRecordCount=50&resultType=standard&cacheHint=true" 
+    //this.apiUrl2 ="https://services2.arcgis.com/mL26ZKdlhFJH9AoM/arcgis/rest/services/es_corona/FeatureServer/0/query?f=json&where=dat_text%3D20210127&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=NAMGEM%20asc&outSR=102100&resultOffset=0&resultRecordCount=50&resultType=standard&cacheHint=true" 
+
     this.cities = {
       'Aichtal': 0,
       'Aichwald': 1,
@@ -125,7 +128,17 @@ class CoronaWidget {
   
   async getData() {
      try {
-      const r = new Request(this.apiUrl)
+      var d = new Date();
+      var day = (d.getDate()-1).toString();
+      var month = (d.getMonth()+1).toString();
+        if(month.toString().length == 1) {
+             month = '0'+month;
+        }
+      var year = d.getFullYear().toString();
+      var dateformat = year+month+day;
+      let apiUrl = "https://services2.arcgis.com/mL26ZKdlhFJH9AoM/arcgis/rest/services/es_corona/FeatureServer/0/query?f=json&where=dat_text%3D"+dateformat+"&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=NAMGEM%20asc&resultOffset=0&resultRecordCount=50&resultType=standard&cacheHint=true"
+
+      const r = new Request(apiUrl)
       let resp = await r.loadJSON()
       let features = resp.features
 
