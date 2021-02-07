@@ -5,6 +5,7 @@ Variante 1:
 1. App "Scriptable" aus dem Appstore laden. App Link: https://apps.apple.com/de/app/scriptable/id1405459188
 2. Die Datei "Coronazahlen lkES.scriptable" downloaden und viva der Teilen Funktion in Scriptable öffnen.
 3. In Scritpable die Datei unten auf importiernen drücken
+4. Variante 2 ab Schritt 5
 
 Variante 2:
 1. Code aus der Datei corona.js in die Zwischenablage kopieren (Mobile auf "browse code" klicken).
