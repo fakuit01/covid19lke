@@ -76,7 +76,7 @@ class CoronaWidget {
 
     var d = new Date();
     
-    d.setDate(d.getDate() - 1);
+//     d.setDate(d.getDate()-1);
     var hours = d.getHours().toString();
     if (hours.toString().length == 1) {
       hours = '0' + hours;
@@ -86,7 +86,11 @@ class CoronaWidget {
       minute = '0' + minute;
     }
     var lastupDated = hours + ":" + minute
-    var day = (d.getDate() - 1);
+    var day = d.getDate().toString();
+    if (day.toString().length == 1) {
+      day = '0' + day;
+    }
+    
     var month = (d.getMonth() + 1).toString();
     if (month.toString().length == 1) {
       month = '0' + month;
@@ -104,16 +108,27 @@ class CoronaWidget {
     textStack.topAlignContent()
 
     if (data2.error) {//gestern
-      day = (d.getDate() - 2);
-      dateformat = year + month + (day).toString();
+      day = (d.getDate() -1).toString();
+    if (day.toString().length == 1) {
+      day = '0' + day;
+    }
+      
+      
+      dateformat = year + month + day;
       data2 = await this.getData1(dateformat)
       if (data2.error) {//vorgestern
-        day -= 1
-        dateformat = year + month + day.toString();
+        day = (d.getDate() -2).toString();
+    if (day.toString().length == 1) {
+      day = '0' + day;
+    }
+        dateformat = year + month + day
         data2 = await this.getData1(dateformat)
         if (data2.error) {//vorvorgestern
-          day = (d.getDate() - 3);
-          dateformat = year + month + day.toString();
+          day = (d.getDate() -3).toString();
+    if (day.toString().length == 1) {
+      day = '0' + day;
+    }
+          dateformat = year + month + day;
           data2 = await this.getData1(dateformat)
           if (data2.error) {
             let errorText = textStack.addText(data2.error.toUpperCase())
@@ -145,7 +160,7 @@ class CoronaWidget {
 
   async getData1(dateformat) {
     try {
-// console.log(dateformat)
+console.log(dateformat)
 
  var d = new Date();
     var hours = d.getHours().toString();
@@ -157,7 +172,7 @@ class CoronaWidget {
       minute = '0' + minute;
     }
     var lastupDated = hours + ":" + minute
-
+ console.log(lastupDated)
       let apiUrl = "https://services2.arcgis.com/mL26ZKdlhFJH9AoM/arcgis/rest/services/es_corona/FeatureServer/0/query?f=json&where=dat_text%3D" + dateformat + "&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=NAMGEM%20asc&resultOffset=0&resultRecordCount=50&resultType=standard&cacheHint=true"
 
       const r = new Request(apiUrl)
@@ -188,7 +203,10 @@ if (city in this.cities) {
       let gen = attr.gen_p.toString()
       let proz_gem = attr.proz_gem.toString()
       let tod_neu = attr.tod_neu.toString()
-      let inf_neu = attr.inf_neu.toString()
+      var inf_neu = attr.inf_neu.toString()
+      if (inf_neu === "-1"){
+        inf_neu = "0"
+      }
       let datum = attr.dat_zahl.toString()
       let fid = attr.FID.toString()
       fidCity = fid
